@@ -5,6 +5,7 @@ import { client, darkModeVar } from "./apollo"
 import Layout from "./components/Layout"
 import routes from "./routes"
 import Home from "./screens/Home"
+import Test from "./screens/Test"
 import { darkTheme, GlobalStyles, lightTheme } from "./styles"
 
 function App() {
@@ -21,7 +22,9 @@ function App() {
               </Layout>
             </Route>
             <Route path={routes.test}>
-              <Home />
+              <Layout>
+                <Test />
+              </Layout>
             </Route>
             <Route>
               <Redirect to={routes.home} />

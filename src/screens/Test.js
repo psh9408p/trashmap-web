@@ -3,10 +3,11 @@ import React, { useEffect } from "react"
 import styled from "styled-components"
 // import $ from "jquery"
 
-const Map = styled.div`
-  width: 100%;
-  height: 400px;
-`
+// const Map = styled.div`
+//   width: 100%;
+//   height: 600px;
+//   /* max-height: 1000px; */
+// `
 
 // 연습용 위치
 const cityhall = new naver.maps.LatLng(37.5666805, 126.9784147)
@@ -83,19 +84,21 @@ const Test = () => {
 
   useEffect(() => {
     map = new naver.maps.Map("map", mapOptions) // 지도 생성
+    const mapSize = new naver.maps.Size(window.innerWidth, window.innerHeight - 49)
+    map.setSize(mapSize)
     createMarker(positionArray) // 마커 생성
   }, [])
 
   return (
     <div>
-      <Map id="map" />
-      <button
+      <div id="map" />
+      {/* <button
         onClick={() => {
           map.fitBounds(seoul)
         }}
       >
         ok
-      </button>
+      </button> */}
     </div>
   )
 }
