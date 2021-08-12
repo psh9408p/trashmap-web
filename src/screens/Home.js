@@ -1,51 +1,72 @@
 /*global naver*/
+import { gql, useQuery } from "@apollo/client"
 import React, { useEffect } from "react"
-import styled from "styled-components"
+// import styled from "styled-components"
 // import $ from "jquery"
 
-// const Map = styled.div`
-//   width: 100%;
-//   height: 600px;
-//   /* max-height: 1000px; */
-// `
-
-// 연습용 위치
-const cityhall = new naver.maps.LatLng(37.5666805, 126.9784147)
-const nowon = new naver.maps.LatLng(37.65993858162937, 127.06464933711598)
-
-const positionArray = [cityhall, nowon]
+const TMounts_QUERY = gql`
+  query seeTMountains {
+    seeTMountains {
+      id
+      latitude
+      longtitude
+      address
+      amount
+      image
+      finish
+      cleanCost
+    }
+  }
+`
 
 // 버튼 이동 예시 지점
-const seoul = new naver.maps.LatLngBounds(
-  new naver.maps.LatLng(37.42829747263545, 126.76620435615891),
-  new naver.maps.LatLng(37.7010174173061, 127.18379493229875)
-)
+// const seoul = new naver.maps.LatLngBounds(
+//   new naver.maps.LatLng(37.42829747263545, 126.76620435615891),
+//   new naver.maps.LatLng(37.7010174173061, 127.18379493229875)
+// )
+
+// 임시 초기 쓰레기산
+const tmpMountain = new naver.maps.LatLng(36.841805, 127.321792)
 
 // 지도 초기 생성 옵션
 const mapOptions = {
-  center: cityhall,
+  center: tmpMountain,
   zoom: 10,
   scaleControl: true,
   logoControl: true,
   mapDataControl: true,
   mapTypeControl: true,
-  zoomControl: true,
+  zoomControl: false,
 }
 
 let map // 지도 넣을 곳
 
 const Home = () => {
+  const { data } = useQuery(TMounts_QUERY)
+
   // 마커 생성 함수
-  const createMarker = (positions) => {
+  const createMarker = (tMountains) => {
     // 여러개 마커 생성 및 이벤트 등록
-    positions.forEach((position) => {
+    tMountains.forEach((tMountain) => {
+      const position = new naver.maps.LatLng(tMountain.latitude, tMountain.longtitude)
+
       // 정보창 html
       var contentString = [
-        "<div>",
-        "   <h3>서울 쓰레기산</h3>",
-        '   <img src="img/trashmount.jpeg" width="150" height="150" alt="쓰레기 지도" class="thumb" />',
-        "   <p>주소 : 서울특별시 중구 태평로1가 31</p>",
-        '   <a href="http://www.seoul.go.kr" target="_blank">자세히 보기</a>',
+        '<div style="width:250px;display:flex;align-items:center;flex-direction:column;padding:15px;line-height:150%;border:none;">',
+        '<div style="margin-bottom:10px;max-width:220px;">',
+        tMountain.image
+          ? `<img src="${tMountain.image}" height="150" alt="쓰레기 지도" />`
+          : "<p>이미지 없음</p>",
+        "</div>",
+        "<p>규모: " +
+          (tMountain.amount ? `${tMountain.amount.toLocaleString("ko-KR")}톤` : `미등록`) +
+          " / 소각: " +
+          (tMountain.finish ? "완료" : "미완료") +
+          "</p>",
+        `   <p>0명이 소각을 지지합니다!</p>`,
+        '   <div style="margin:20px 0 5px 0">',
+        `     <a href="/tmountain/${tMountain.id}" style="border:none;padding:10px 20px;border-radius:5px;background-color:#ecf0f1;">참여하기</a>`,
+        "   </div>",
         "</div>",
       ].join("")
 
@@ -59,10 +80,10 @@ const Home = () => {
       var infowindow = new naver.maps.InfoWindow({
         content: contentString,
 
-        maxWidth: 300,
+        // maxWidth: 300,
         backgroundColor: "white",
         borderColor: "grey",
-        borderWidth: 1,
+        borderWidth: 2,
         anchorSize: new naver.maps.Size(0, 0),
         // anchorSkew: true,
         // anchorColor: "white",
@@ -84,10 +105,15 @@ const Home = () => {
 
   useEffect(() => {
     map = new naver.maps.Map("map", mapOptions) // 지도 생성
-    const mapSize = new naver.maps.Size(window.innerWidth, window.innerHeight - 49)
+    const mapSize = new naver.maps.Size(window.innerWidth, window.innerHeight) // 해더 -49 나중에 추가
     map.setSize(mapSize)
-    createMarker(positionArray) // 마커 생성
   }, [])
+
+  useEffect(() => {
+    if (data) {
+      createMarker(data?.seeTMountains) // 마커 생성
+    }
+  }, [data])
 
   return (
     <div>

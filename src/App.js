@@ -5,6 +5,7 @@ import { client, darkModeVar } from "./apollo"
 import Layout from "./components/Layout"
 import routes from "./routes"
 import Home from "./screens/Home"
+import TMountain from "./screens/TMountain"
 import Test from "./screens/Test"
 import { darkTheme, GlobalStyles, lightTheme } from "./styles"
 
@@ -20,6 +21,9 @@ function App() {
               <Layout>
                 <Home />
               </Layout>
+            </Route>
+            <Route path={routes.tMountain}>
+              <TMountain />
             </Route>
             <Route path={routes.test}>
               <Layout>
