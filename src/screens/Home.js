@@ -42,7 +42,8 @@ const mapOptions = {
 let map // 지도 넣을 곳
 
 const Home = () => {
-  const { data } = useQuery(TMounts_QUERY)
+  const { data, error } = useQuery(TMounts_QUERY)
+  console.log(error)
 
   // 마커 생성 함수
   const createMarker = (tMountains) => {
