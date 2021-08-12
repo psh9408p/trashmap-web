@@ -34,7 +34,7 @@ const Border = styled.div`
   background: rgb(112, 112, 112);
 `;
 
-const InfoBox = () => {
+const InfoBox = ({ SearchBtn }) => {
   return (
     <InfoBoxS>
       <TitleBox>트래쉬맵</TitleBox>
@@ -42,8 +42,8 @@ const InfoBox = () => {
       <div style={{ marginLeft: "auto" }}>
         <div></div>
         <div>
-          {" "}
-          <FontAwesomeIcon icon={faSearch} size="lg" />
+          <input onKeyDown={SearchBtn} type="text"></input>
+          <FontAwesomeIcon onClick={SearchBtn} icon={faSearch} size="lg" />
         </div>
       </div>
     </InfoBoxS>

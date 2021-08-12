@@ -4,7 +4,9 @@ import styled from "styled-components";
 // import $ from "jquery"
 import InfoBox from "../components/InfoBox";
 import Current from "../components/Current";
+import "./App.css";
 
+const { kakao } = window;
 const Map = styled.div`
   padding: 0px !important;
   width: 100vw;
@@ -90,17 +92,48 @@ const Test = () => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         const latlng = new naver.maps.LatLng(latitude, longitude);
-
         map.setCenter(latlng); // 얻은 좌표를 지도의 중심으로 설정합니다.
         map.setZoom(18);
         marker = new naver.maps.Marker({
           map: map,
           position: latlng,
+          icon: {
+            content:
+              '<img class="pulse" draggable="false" unselectable="on" src="https://myfirstmap.s3.ap-northeast-2.amazonaws.com/circle.png">',
+            anchor: new naver.maps.Point(11, 11),
+          },
         });
       });
     } else {
       /* 위치정보 사용 불가능 */
       alert("nono");
+    }
+  };
+
+  // 엔터
+  let ps = new kakao.maps.services.Places();
+
+  const SearchBtn = (e) => {
+    if (e.keyCode === 13) {
+      let content = e.target.value;
+      ps.keywordSearch(content, placeSearchCB);
+    }
+  };
+
+  const placeSearchCB = (data, status) => {
+    if ((status = kakao.maps.services.Status.OK)) {
+      let target = data[0];
+      const lat = target.y;
+      const lng = target.x;
+      const latlng = new naver.maps.LatLng(lat, lng);
+      // marker = new naver.maps.Marker({
+      //   position: latlng,
+      //   map: map,
+      // });
+      map.setZoom(14, false);
+      map.panTo(latlng);
+    } else {
+      alert("??");
     }
   };
 
@@ -125,7 +158,7 @@ const Test = () => {
         ok
       </button> */}
 
-      <InfoBox />
+      <InfoBox SearchBtn={SearchBtn} />
       <Current getCurrentPosition={getCurrentPosition} />
     </div>
   );

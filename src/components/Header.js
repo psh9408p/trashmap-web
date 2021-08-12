@@ -1,38 +1,38 @@
-import { useReactiveVar } from "@apollo/client"
+import { useReactiveVar } from "@apollo/client";
 // import { faInstagram } from "@fortawesome/free-brands-svg-icons"
-import { faCompass } from "@fortawesome/free-regular-svg-icons"
-import { faHome, faMountain } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Link } from "react-router-dom"
-import styled from "styled-components"
-import { isLoggedInVar } from "../apollo"
-import useUser from "../hooks/useUser"
-import routes from "../routes"
-import Avatar from "./Avatar"
+import { faCompass } from "@fortawesome/free-regular-svg-icons";
+import { faHome, faMountain } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { isLoggedInVar } from "../apollo";
+import useUser from "../hooks/useUser";
+import routes from "../routes";
+import Avatar from "./Avatar";
 
 const SHeader = styled.header`
   width: 100%;
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
   background-color: ${(props) => props.theme.bgColor};
-  padding: 10px 0px;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const Wrapper = styled.div`
-  max-width: 930px;
+  /* max-width: 930px; */
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+`;
 
-const Column = styled.div``
+const Column = styled.div``;
 
 const Icon = styled.span`
   margin-left: 15px;
-`
+`;
 
 const Button = styled.span`
   background-color: ${(props) => props.theme.accent};
@@ -40,16 +40,16 @@ const Button = styled.span`
   padding: 4px 15px;
   color: white;
   font-weight: 600;
-`
+`;
 
 const IconsContainer = styled.div`
   display: flex;
   align-items: center;
-`
+`;
 
 function Header() {
-  const isLoggedIn = useReactiveVar(isLoggedInVar)
-  const { data } = useUser()
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
+  const { data } = useUser();
   return (
     <SHeader>
       <Wrapper>
@@ -81,6 +81,6 @@ function Header() {
         </Column>
       </Wrapper>
     </SHeader>
-  )
+  );
 }
-export default Header
+export default Header;
