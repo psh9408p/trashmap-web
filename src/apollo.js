@@ -29,7 +29,7 @@ export const disableDarkMode = () => {
 }
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri: process.env.REACT_APP_BACKEND_URI,
 })
 
 const authLink = setContext((_, { headers }) => {
