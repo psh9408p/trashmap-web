@@ -9,6 +9,7 @@ import { isLoggedInVar } from "../apollo"
 import useUser from "../hooks/useUser"
 import routes from "../routes"
 import Avatar from "./Avatar"
+import { FatText } from "./shared"
 
 const SHeader = styled.header`
   width: 100%;
@@ -28,7 +29,15 @@ const Wrapper = styled.div`
   align-items: center;
 `
 
-const Column = styled.div``
+const Column = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    margin-left: 10px;
+    font-size: 1.2em;
+    font-weight: 900;
+  }
+`
 
 const Icon = styled.span`
   margin-left: 15px;
@@ -55,6 +64,7 @@ function Header() {
       <Wrapper>
         <Column>
           <FontAwesomeIcon icon={faMountain} size="2x" />
+          <span>K-트래쉬맵</span>
         </Column>
         <Column>
           {/* {isLoggedIn ? (
