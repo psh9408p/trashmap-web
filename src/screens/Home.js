@@ -2,8 +2,10 @@
 /*global kakao*/
 import { gql, useQuery } from "@apollo/client"
 import React, { useEffect } from "react"
+import styled from "styled-components"
 import Current from "../components/Current"
 import InfoBox from "../components/InfoBox"
+import Loading from "../components/Loading"
 // import styled from "styled-components"
 // import $ from "jquery"
 
@@ -20,6 +22,12 @@ const TMounts_QUERY = gql`
       cleanCost
     }
   }
+`
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 // 버튼 이동 예시 지점
@@ -45,7 +53,7 @@ const mapOptions = {
 let map // 지도 넣을 곳
 
 const Home = () => {
-  const { data } = useQuery(TMounts_QUERY)
+  const { data, loading } = useQuery(TMounts_QUERY)
 
   // 마커 생성 함수
   const createMarker = (tMountains) => {
@@ -57,9 +65,7 @@ const Home = () => {
       var contentString = [
         '<div style="width:250px;display:flex;align-items:center;flex-direction:column;padding:15px;line-height:150%;border:none;">',
         '<div style="margin-bottom:10px;max-width:220px;">',
-        tMountain.image
-          ? `<img src="${tMountain.image}" height="150" alt="쓰레기 지도" />`
-          : "<p>이미지 없음</p>",
+        tMountain.image ? `<img src="${tMountain.image}" height="150" alt="쓰레기 지도" />` : null,
         "</div>",
         "<p>규모: " +
           (tMountain.amount ? `${tMountain.amount.toLocaleString("ko-KR")}톤` : `미등록`) +
@@ -172,11 +178,12 @@ const Home = () => {
   }, [data])
 
   return (
-    <div>
+    <Wrapper>
+      {loading && <Loading />}
       <div id="map" />
       <InfoBox SearchBtn={SearchBtn} />
       <Current getCurrentPosition={getCurrentPosition} />
-    </div>
+    </Wrapper>
   )
 }
 
