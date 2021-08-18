@@ -1,16 +1,15 @@
-import styled, { keyframes } from "styled-components"
+import styled, { keyframes } from "styled-components";
 
 const Square = styled.div`
   position: absolute;
   z-index: 10000;
   border: 0;
-  /* width: 50px;
-  padding: 0px; */
-  /* margin-top: 90px; */
-  /* margin-left: calc(50% - 40px);
-  margin-left: -webkit-calc(50% - 40px);
-  margin-left: -moz-calc(50% - 40px); */
-`
+  width: ${(props) => props.widthSize};
+  height: ${(props) => props.heightSize};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const spinKey = keyframes`
   from {
@@ -19,7 +18,7 @@ const spinKey = keyframes`
   to {
     transform: rotate(360deg);
   }
-`
+`;
 
 const Spin = styled.div`
   height: 50px;
@@ -27,14 +26,17 @@ const Spin = styled.div`
   border-radius: 50%;
   border: dashed 5px black;
   animation: ${spinKey} 1.5s infinite linear;
-`
+`;
 
 function Loading() {
   return (
-    <Square>
+    <Square
+      widthSize={`${window.innerWidth}px`}
+      heightSize={`${window.innerHeight}px`}
+    >
       <Spin />
     </Square>
-  )
+  );
 }
 
-export default Loading
+export default Loading;
