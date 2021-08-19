@@ -10,7 +10,7 @@ import Test from "./screens/Test"
 import { darkTheme, GlobalStyles, lightTheme } from "./styles"
 
 function App() {
-  const darkMode = useReactiveVar(darkModeVar);
+  const darkMode = useReactiveVar(darkModeVar)
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
@@ -23,7 +23,9 @@ function App() {
               </Layout>
             </Route>
             <Route path={routes.tMountain}>
-              <TMountain />
+              <Layout>
+                <TMountain />
+              </Layout>
             </Route>
             <Route path={routes.test}>
               <Layout>
@@ -37,7 +39,7 @@ function App() {
         </Router>
       </ThemeProvider>
     </ApolloProvider>
-  );
+  )
 }
 
-export default App;
+export default App

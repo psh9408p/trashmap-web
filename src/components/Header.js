@@ -29,6 +29,16 @@ const Wrapper = styled.div`
   align-items: center;
 `
 
+const MarkLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  span {
+    margin-left: 10px;
+    font-size: 1.2em;
+    font-weight: 900;
+  }
+`
+
 const Column = styled.div`
   display: flex;
   align-items: center;
@@ -62,10 +72,10 @@ function Header() {
   return (
     <SHeader>
       <Wrapper>
-        <Column>
+        <MarkLink to="/">
           <FontAwesomeIcon icon={faMountain} size="2x" />
           <span>K-트래쉬맵</span>
-        </Column>
+        </MarkLink>
         <Column>
           {/* {isLoggedIn ? (
             <IconsContainer>

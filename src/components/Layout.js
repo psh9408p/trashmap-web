@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import Header from "./Header";
+import styled from "styled-components"
+import Header from "./Header"
 
 const Content = styled.main`
   margin: 0;
-  max-width: 930px;
-`;
+  /* max-width: 930px; */
+`
 
 function Layout({ children }) {
   return (
@@ -12,7 +12,7 @@ function Layout({ children }) {
       <Header />
       <Content>{children}</Content>
     </>
-  );
+  )
 }
 
-export default Layout;
+export default Layout
