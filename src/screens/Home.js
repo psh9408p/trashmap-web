@@ -97,6 +97,7 @@ const Home = () => {
       // 마커에 이벤트 등록
       naver.maps.Event.addListener(marker, "click", function (e) {
         // console.log(infowindow, infowindow.getMap())
+        console.log(e)
         if (infowindow.getMap()) {
           infowindow.close()
         } else {
