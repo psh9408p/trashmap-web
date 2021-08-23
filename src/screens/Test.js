@@ -1,8 +1,10 @@
 /*global naver*/
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 // import $ from "jquery"
 import InfoBox from "../components/InfoBox";
+import InfoBox2 from "../components/InfoBox2";
+
 import Current from "../components/Current";
 import "./App.css";
 
@@ -85,28 +87,43 @@ const Test = () => {
     });
   };
 
+  const [onPosition, setOnPosition] = useState(false);
+
+  const switchPos = () => {
+    if (!onPosition) {
+      setOnPosition(true);
+    } else {
+      setOnPosition(false);
+    }
+  };
+
   const getCurrentPosition = () => {
-    if (navigator.geolocation) {
+    switchPos();
+
+    if (navigator.geolocation && !onPosition) {
       /* 위치정보 사용 가능 */
       navigator.geolocation.getCurrentPosition((position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         const latlng = new naver.maps.LatLng(latitude, longitude);
-        map.setCenter(latlng); // 얻은 좌표를 지도의 중심으로 설정합니다.
-        map.setZoom(18);
+        // map.setCenter(latlng); // 얻은 좌표를 지도의 중심으로 설정합니다.
+        // map.setZoom(18);
         marker = new naver.maps.Marker({
           map: map,
           position: latlng,
           icon: {
             content:
-              '<img class="pulse" draggable="false" unselectable="on" src="https://myfirstmap.s3.ap-northeast-2.amazonaws.com/circle.png">',
+              '<img class="puslse" draggable="false" unselectable="on" src="https://myfirstmap.s3.ap-northeast-2.amazonaws.com/circle.png">',
             anchor: new naver.maps.Point(11, 11),
           },
         });
+        map.setZoom(14, false);
+        map.panTo(latlng);
       });
     } else {
       /* 위치정보 사용 불가능 */
-      alert("nono");
+      // alert("위치 정보가 없습니다.");
+      marker.setMap(null);
     }
   };
 
@@ -159,7 +176,12 @@ const Test = () => {
       </button> */}
 
       <InfoBox SearchBtn={SearchBtn} />
-      <Current getCurrentPosition={getCurrentPosition} />
+      <InfoBox2 />
+
+      <Current
+        getCurrentPosition={getCurrentPosition}
+        onPosition={onPosition}
+      />
     </div>
   );
 };
