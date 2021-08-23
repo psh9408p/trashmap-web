@@ -17,11 +17,13 @@ const CurrentLocation = styled.div`
   box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px 0px;
   border: 1px solid rgb(232, 232, 232);
   background-color: rgb(255, 255, 255);
+
+  background: ${(props) => (!props.onPosition ? "white" : "#bdbdbd")};
 `;
 
-const Current = ({ getCurrentPosition }) => {
+const Current = ({ getCurrentPosition, onPosition }) => {
   return (
-    <CurrentLocation onClick={getCurrentPosition}>
+    <CurrentLocation onClick={getCurrentPosition} onPosition={onPosition}>
       {" "}
       <FontAwesomeIcon icon={faCrosshairs} size="lg" />
     </CurrentLocation>

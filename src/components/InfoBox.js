@@ -43,7 +43,7 @@ const InfoBox = ({ SearchBtn }) => {
         <div></div>
         <div>
           <input onKeyDown={SearchBtn} type="text"></input>
-          <FontAwesomeIcon onClick={SearchBtn} icon={faSearch} size="lg" />
+          <FontAwesomeIcon icon={faSearch} size="lg" />
         </div>
       </div>
     </InfoBoxS>
