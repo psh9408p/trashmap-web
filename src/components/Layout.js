@@ -3,15 +3,13 @@ import Header from "./Header"
 
 const Content = styled.main`
   margin: 0;
-  max-width: 930px;
-  width: 100%;
-  height: 100%;
+  /* max-width: 930px; */
 `
 
 function Layout({ children }) {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <Content>{children}</Content>
     </>
   )

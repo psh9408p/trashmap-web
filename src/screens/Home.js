@@ -1,6 +1,11 @@
 /*global naver*/
+/*global kakao*/
 import { gql, useQuery } from "@apollo/client"
 import React, { useEffect } from "react"
+import styled from "styled-components"
+import Current from "../components/Current"
+import InfoBox from "../components/InfoBox"
+import Loading from "../components/Loading"
 // import styled from "styled-components"
 // import $ from "jquery"
 
@@ -35,14 +40,14 @@ const mapOptions = {
   scaleControl: true,
   logoControl: true,
   mapDataControl: true,
-  mapTypeControl: true,
+  mapTypeControl: false,
   zoomControl: false,
 }
 
 let map // 지도 넣을 곳
 
 const Home = () => {
-  const { data } = useQuery(TMounts_QUERY)
+  const { data, loading } = useQuery(TMounts_QUERY)
 
   // 마커 생성 함수
   const createMarker = (tMountains) => {
@@ -54,13 +59,11 @@ const Home = () => {
       var contentString = [
         '<div style="width:250px;display:flex;align-items:center;flex-direction:column;padding:15px;line-height:150%;border:none;">',
         '<div style="margin-bottom:10px;max-width:220px;">',
-        tMountain.image
-          ? `<img src="${tMountain.image}" height="150" alt="쓰레기 지도" />`
-          : "<p>이미지 없음</p>",
+        tMountain.image ? `<img src="${tMountain.image}" height="150" alt="쓰레기 지도" />` : null,
         "</div>",
         "<p>규모: " +
           (tMountain.amount ? `${tMountain.amount.toLocaleString("ko-KR")}톤` : `미등록`) +
-          " / 소각: " +
+          " / 처리 여부: " +
           (tMountain.finish ? "완료" : "미완료") +
           "</p>",
         `   <p>0명이 소각을 지지합니다!</p>`,
@@ -94,6 +97,7 @@ const Home = () => {
       // 마커에 이벤트 등록
       naver.maps.Event.addListener(marker, "click", function (e) {
         // console.log(infowindow, infowindow.getMap())
+        console.log(e)
         if (infowindow.getMap()) {
           infowindow.close()
         } else {
@@ -103,9 +107,62 @@ const Home = () => {
     })
   }
 
+  // 현재위치 이동
+  const getCurrentPosition = () => {
+    if (navigator.geolocation) {
+      /* 위치정보 사용 가능 */
+      navigator.geolocation.getCurrentPosition((position) => {
+        const latitude = position.coords.latitude
+        const longitude = position.coords.longitude
+        const latlng = new naver.maps.LatLng(latitude, longitude)
+        map.setCenter(latlng) // 얻은 좌표를 지도의 중심으로 설정합니다.
+        map.setZoom(18)
+        new naver.maps.Marker({
+          map: map,
+          position: latlng,
+          icon: {
+            content:
+              '<img class="pulse" draggable="false" unselectable="on" src="https://myfirstmap.s3.ap-northeast-2.amazonaws.com/circle.png">',
+            anchor: new naver.maps.Point(11, 11),
+          },
+        })
+      })
+    } else {
+      /* 위치정보 사용 불가능 */
+      alert("위치정보 사용이 불가능합니다.")
+    }
+  }
+
+  // 검색 이동
+  let ps = new kakao.maps.services.Places()
+
+  const SearchBtn = (e) => {
+    if (e.keyCode === 13) {
+      let content = e.target.value
+      ps.keywordSearch(content, placeSearchCB)
+    }
+  }
+
+  const placeSearchCB = (data, status) => {
+    if ((status = kakao.maps.services.Status.OK)) {
+      let target = data[0]
+      const lat = target.y
+      const lng = target.x
+      const latlng = new naver.maps.LatLng(lat, lng)
+      // marker = new naver.maps.Marker({
+      //   position: latlng,
+      //   map: map,
+      // });
+      map.setZoom(14, false)
+      map.panTo(latlng)
+    } else {
+      alert("??")
+    }
+  }
+
   useEffect(() => {
     map = new naver.maps.Map("map", mapOptions) // 지도 생성
-    const mapSize = new naver.maps.Size(window.innerWidth, window.innerHeight) // 해더 -49 나중에 추가
+    const mapSize = new naver.maps.Size(window.innerWidth, window.innerHeight - 49) // 해더 -49 나중에 추가
     map.setSize(mapSize)
   }, [])
 
@@ -117,14 +174,10 @@ const Home = () => {
 
   return (
     <div>
+      {loading && <Loading />}
       <div id="map" />
-      {/* <button
-        onClick={() => {
-          map.fitBounds(seoul)
-        }}
-      >
-        ok
-      </button> */}
+      <InfoBox SearchBtn={SearchBtn} />
+      <Current getCurrentPosition={getCurrentPosition} />
     </div>
   )
 }
