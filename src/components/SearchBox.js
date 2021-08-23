@@ -64,7 +64,7 @@ const Border = styled.div`
   background: rgb(112, 112, 112);
 `
 
-const InfoBox = ({ SearchBtn }) => {
+const SearchBox = ({ SearchBtn }) => {
   return (
     <InfoBoxS>
       {/* <TitleBox>트래쉬맵</TitleBox> */}
@@ -84,4 +84,4 @@ const InfoBox = ({ SearchBtn }) => {
   )
 }
 
-export default InfoBox
+export default SearchBox

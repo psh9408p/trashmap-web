@@ -18,7 +18,7 @@ const CurrentLocation = styled.div`
   border: 1px solid rgb(232, 232, 232);
   background-color: rgb(255, 255, 255);
   background: ${(props) => (!props.onPosition ? "white" : "#bdbdbd")};
-`;
+`
 
 const Current = ({ getCurrentPosition, onPosition }) => {
   return (

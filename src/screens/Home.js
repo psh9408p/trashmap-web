@@ -1,10 +1,11 @@
 /*global naver*/
 /*global kakao*/
 import { gql, useQuery } from "@apollo/client"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import Current from "../components/Current"
-import InfoBox from "../components/InfoBox"
+import SearchBox from "../components/SearchBox"
+import FreeBoard from "../components/FreeBoard"
 import Loading from "../components/Loading"
 // import styled from "styled-components"
 // import $ from "jquery"
@@ -45,8 +46,11 @@ const mapOptions = {
 }
 
 let map // 지도 넣을 곳
+let marker // 현재위치 마커
 
 const Home = () => {
+  const [onPosition, setOnPosition] = useState(false)
+
   const { data, loading } = useQuery(TMounts_QUERY)
 
   // 마커 생성 함수
@@ -107,17 +111,27 @@ const Home = () => {
     })
   }
 
+  const switchPos = () => {
+    if (!onPosition) {
+      setOnPosition(true)
+    } else {
+      setOnPosition(false)
+    }
+  }
+
   // 현재위치 이동
   const getCurrentPosition = () => {
-    if (navigator.geolocation) {
+    switchPos()
+
+    if (navigator.geolocation && !onPosition) {
       /* 위치정보 사용 가능 */
       navigator.geolocation.getCurrentPosition((position) => {
         const latitude = position.coords.latitude
         const longitude = position.coords.longitude
         const latlng = new naver.maps.LatLng(latitude, longitude)
-        map.setCenter(latlng) // 얻은 좌표를 지도의 중심으로 설정합니다.
-        map.setZoom(18)
-        new naver.maps.Marker({
+        // map.setCenter(latlng); // 얻은 좌표를 지도의 중심으로 설정합니다.
+        // map.setZoom(18);
+        marker = new naver.maps.Marker({
           map: map,
           position: latlng,
           icon: {
@@ -126,10 +140,13 @@ const Home = () => {
             anchor: new naver.maps.Point(11, 11),
           },
         })
+        map.setZoom(14, false)
+        map.panTo(latlng)
       })
     } else {
       /* 위치정보 사용 불가능 */
-      alert("위치정보 사용이 불가능합니다.")
+      // alert("위치 정보가 없습니다.");
+      marker.setMap(null)
     }
   }
 
@@ -176,8 +193,9 @@ const Home = () => {
     <div>
       {loading && <Loading />}
       <div id="map" />
-      <InfoBox SearchBtn={SearchBtn} />
-      <Current getCurrentPosition={getCurrentPosition} />
+      <SearchBox SearchBtn={SearchBtn} />
+      <FreeBoard />
+      <Current getCurrentPosition={getCurrentPosition} onPosition={onPosition} />
     </div>
   )
 }
