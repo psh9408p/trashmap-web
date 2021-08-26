@@ -3,10 +3,10 @@ import styled from "styled-components"
 
 const InfoBoxS = styled.div`
   position: absolute;
-  width: 150px;
-  top: 100px;
+  width: 200px;
+  top: 95px;
   z-index: 10000;
-  padding: 5px;
+  padding: 3px;
   border-radius: 4px;
   text-align: center;
   justify-content: space-between;
@@ -31,11 +31,11 @@ const Board = styled.div`
 `
 
 const Item = styled.ul`
-  padding: 10px;
+  padding: 5px;
 
-  &:not(:first-child) {
+  /* &:not(:first-child) {
     border-left: 1px solid ${(props) => props.theme.lightGrey};
-  }
+  } */
 
   li {
     &:nth-child(2) {
@@ -43,6 +43,14 @@ const Item = styled.ul`
       font-weight: 600;
     }
   }
+`
+
+const Report = styled.li`
+  cursor: pointer;
+  background-color: ${(props) => props.theme.midGrey};
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
 `
 
 const FreeBoard = ({ mountains }) => {
@@ -54,12 +62,21 @@ const FreeBoard = ({ mountains }) => {
     <InfoBoxS>
       <Board>
         <Item>
-          <li>처리 완료</li>
+          <li>처리</li>
           <li>{finishCount ? finishCount : "..."}</li>
         </Item>
         <Item>
           <li>등록</li>
           <li>{totalCount ? totalCount : "..."}</li>
+        </Item>
+        <Item>
+          <Report
+            onClick={() => {
+              alert("제보하기 준비 중입니다.")
+            }}
+          >
+            제보하기
+          </Report>
         </Item>
       </Board>
     </InfoBoxS>
