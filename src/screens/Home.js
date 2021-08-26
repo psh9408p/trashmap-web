@@ -170,7 +170,7 @@ const Home = () => {
       //   position: latlng,
       //   map: map,
       // });
-      map.setZoom(14, false)
+      map.setZoom(15, false)
       map.panTo(latlng)
     } else {
       alert("??")
@@ -194,7 +194,7 @@ const Home = () => {
       {loading && <Loading />}
       <div id="map" />
       <SearchBox SearchBtn={SearchBtn} />
-      <FreeBoard />
+      <FreeBoard mountains={data?.seeTMountains} />
       <Current getCurrentPosition={getCurrentPosition} onPosition={onPosition} />
     </div>
   )

@@ -76,7 +76,11 @@ const SearchBox = ({ SearchBtn }) => {
           <FontAwesomeIcon onClick={SearchBtn} icon={faSearch} size="lg" />
         </IconWrap>
         <InputWrap>
-          <SearchInput onKeyDown={SearchBtn} type="text" />
+          <SearchInput
+            onKeyDown={SearchBtn}
+            placeholder={"예) 서울역 or 포레나노원아파트 or 삼성동"}
+            type="text"
+          />
         </InputWrap>
       </SearchWrap>
       {/* </div> */}

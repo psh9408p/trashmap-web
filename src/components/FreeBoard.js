@@ -3,10 +3,10 @@ import styled from "styled-components"
 
 const InfoBoxS = styled.div`
   position: absolute;
-  width: 230px;
+  width: 150px;
   top: 100px;
   z-index: 10000;
-  padding: 15px;
+  padding: 5px;
   border-radius: 4px;
   text-align: center;
   justify-content: space-between;
@@ -30,22 +30,37 @@ const Board = styled.div`
   align-items: center;
 `
 
-const FreeBoard = () => {
+const Item = styled.ul`
+  padding: 10px;
+
+  &:not(:first-child) {
+    border-left: 1px solid ${(props) => props.theme.lightGrey};
+  }
+
+  li {
+    &:nth-child(2) {
+      margin-top: 5px;
+      font-weight: 600;
+    }
+  }
+`
+
+const FreeBoard = ({ mountains }) => {
+  const totalCount = mountains?.length
+  const finishMountains = mountains?.filter((mountain) => mountain.finish)
+  const finishCount = finishMountains?.length
+
   return (
     <InfoBoxS>
       <Board>
-        <ul>
-          <li>임시</li>
-          <li>2123</li>
-        </ul>
-        <ul>
-          <li>임시</li>
-          <li>2,111</li>
-        </ul>
-        <ul>
-          <li>임시</li>
-          <li>2,333</li>
-        </ul>
+        <Item>
+          <li>처리 완료</li>
+          <li>{finishCount ? finishCount : "..."}</li>
+        </Item>
+        <Item>
+          <li>등록</li>
+          <li>{totalCount ? totalCount : "..."}</li>
+        </Item>
       </Board>
     </InfoBoxS>
   )
