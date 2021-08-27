@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { openNotice } from "../apollo"
 
 const InfoBoxS = styled.div`
   position: absolute;
@@ -70,13 +71,7 @@ const FreeBoard = ({ mountains }) => {
           <li>{totalCount ? totalCount : "..."}</li>
         </Item>
         <Item>
-          <Report
-            onClick={() => {
-              alert("제보하기 준비 중입니다.")
-            }}
-          >
-            제보하기
-          </Report>
+          <Report onClick={() => openNotice()}>공지&제보</Report>
         </Item>
       </Board>
     </InfoBoxS>

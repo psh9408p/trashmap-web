@@ -8,6 +8,8 @@ export const lightTheme = {
   borderColor: "rgb(219, 219, 219)",
   midGrey: "#c8d6e5",
   lightGrey: "#F4F4F4",
+  windowWidth: `${window.innerWidth}px`,
+  windowHeight: `${window.innerHeight - 35}px`,
 }
 
 export const darkTheme = {

@@ -1,12 +1,14 @@
 /*global naver*/
 /*global kakao*/
-import { gql, useQuery } from "@apollo/client"
+import { gql, useQuery, useReactiveVar } from "@apollo/client"
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import Current from "../components/Current"
 import SearchBox from "../components/SearchBox"
 import FreeBoard from "../components/FreeBoard"
 import Loading from "../components/Loading"
+import Notice from "../components/Notice"
+import { noticePopVar } from "../apollo"
 // import styled from "styled-components"
 // import $ from "jquery"
 
@@ -49,6 +51,8 @@ let map // 지도 넣을 곳
 let marker // 현재위치 마커
 
 const Home = () => {
+  const noticePop = useReactiveVar(noticePopVar)
+
   const [onPosition, setOnPosition] = useState(false)
 
   const { data, loading } = useQuery(TMounts_QUERY)
@@ -191,6 +195,7 @@ const Home = () => {
 
   return (
     <div>
+      {noticePop && <Notice />}
       {loading && <Loading />}
       <div id="map" />
       <SearchBox SearchBtn={SearchBtn} />

@@ -8,6 +8,7 @@ import Home from "./screens/Home"
 import TMountain from "./screens/TMountain"
 import Test from "./screens/Test"
 import { darkTheme, GlobalStyles, lightTheme } from "./styles"
+import Introduce from "./screens/Introduce"
 
 function App() {
   const darkMode = useReactiveVar(darkModeVar)
@@ -25,6 +26,11 @@ function App() {
             <Route path={routes.tMountain}>
               <Layout>
                 <TMountain />
+              </Layout>
+            </Route>
+            <Route path={routes.introduce}>
+              <Layout>
+                <Introduce />
               </Layout>
             </Route>
             <Route path={routes.test}>
