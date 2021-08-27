@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { isLoggedInVar } from "../apollo"
 import useUser from "../hooks/useUser"
+import { Logo } from "./Icons"
 
 const SHeader = styled.header`
   width: 100%;
@@ -12,6 +13,7 @@ const SHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 35px;
 `
 
 const Wrapper = styled.div`
@@ -49,7 +51,8 @@ function Header() {
     <SHeader>
       <Wrapper>
         <MarkLink to="/">
-          <img src="logo.png" />
+          <Logo />
+          {/* <img src="logo.png" /> */}
           <span>K-트래쉬맵</span>
         </MarkLink>
         <Column>

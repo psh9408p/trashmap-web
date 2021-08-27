@@ -12,14 +12,16 @@ const Wrapper = styled.div`
 `
 
 const File = styled.img`
-  /* max-width: 100%; */
+  max-width: 800px;
   width: 100%;
-  /* max-height: 500px; */
-  top: 0;
+  max-height: 600px;
+  /* top: 0; */
   border: 2px solid ${(props) => props.theme.midGrey};
   background-image: url(${(props) => props.src});
   background-size: contain;
   background-position: center;
+  box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px 0px;
+  border: 1px solid rgb(232, 232, 232);
 `
 
 const introImg = [
@@ -34,8 +36,11 @@ const introImg = [
 function Introduce() {
   const params = {
     slidesPerView: "auto",
+    centeredSlides: true,
     spaceBetween: 30,
-    loop: true,
+    grabCursor: true,
+    // direction: "vertical",
+    // loop: true,
     autoplay: {
       delay: 10000,
       disableOnInteraction: false,
