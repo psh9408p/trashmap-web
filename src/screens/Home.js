@@ -2,7 +2,6 @@
 /*global kakao*/
 import { gql, useQuery, useReactiveVar } from "@apollo/client"
 import React, { useEffect, useState } from "react"
-import styled from "styled-components"
 import Current from "../components/Current"
 import SearchBox from "../components/SearchBox"
 import FreeBoard from "../components/FreeBoard"
@@ -53,7 +52,7 @@ let marker // 현재위치 마커
 const Home = () => {
   const noticePop = useReactiveVar(noticePopVar)
 
-  const [onPosition, setOnPosition] = useState(false)
+  const [getPosition, setGetPosition] = useState(false)
 
   const { data, loading } = useQuery(TMounts_QUERY)
 
@@ -116,10 +115,10 @@ const Home = () => {
   }
 
   const switchPos = () => {
-    if (!onPosition) {
-      setOnPosition(true)
+    if (!getPosition) {
+      setGetPosition(true)
     } else {
-      setOnPosition(false)
+      setGetPosition(false)
     }
   }
 
@@ -127,7 +126,7 @@ const Home = () => {
   const getCurrentPosition = () => {
     switchPos()
 
-    if (navigator.geolocation && !onPosition) {
+    if (navigator.geolocation && !getPosition) {
       /* 위치정보 사용 가능 */
       navigator.geolocation.getCurrentPosition((position) => {
         const latitude = position.coords.latitude
@@ -183,7 +182,7 @@ const Home = () => {
 
   useEffect(() => {
     map = new naver.maps.Map("map", mapOptions) // 지도 생성
-    const mapSize = new naver.maps.Size(window.innerWidth, window.innerHeight - 49) // 해더 -49 나중에 추가
+    const mapSize = new naver.maps.Size(window.innerWidth, window.innerHeight - 35)
     map.setSize(mapSize)
   }, [])
 
@@ -200,7 +199,7 @@ const Home = () => {
       <div id="map" />
       <SearchBox SearchBtn={SearchBtn} />
       <FreeBoard mountains={data?.seeTMountains} />
-      <Current getCurrentPosition={getCurrentPosition} onPosition={onPosition} />
+      <Current getCurrentPosition={getCurrentPosition} getPosition={getPosition} />
     </div>
   )
 }

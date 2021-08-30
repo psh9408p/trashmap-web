@@ -102,7 +102,7 @@ function Notice() {
             <Intro onClick={() => closeNotice()}>K-트래쉬맵 소개</Intro>
           </ALink>
           <Report>
-            <p>새로운 쓰레기산, 오류, 기타 제보</p>
+            <p>쓰레기산 제보, 피드백&기타 문의</p>
             <ItemOrder>
               <li>ertr777@naver.com</li>
               <li>우측 하단 채널톡 문의</li>

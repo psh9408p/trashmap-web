@@ -88,7 +88,7 @@ function TMountain() {
     notifyOnNetworkStatusChange: true,
   })
 
-  // console.log(data, loading, networkStatus, error);
+  console.log(data)
 
   return (
     <Wrapper>

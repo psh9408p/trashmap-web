@@ -112,6 +112,8 @@ function InfoDiv({ mountain }) {
           &#215; {truckCount}번 운송
         </AmountWrap>
       )
+    } else {
+      return <div></div>
     }
   }
 

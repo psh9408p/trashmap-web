@@ -4,7 +4,7 @@ import { openNotice } from "../apollo"
 
 const InfoBoxS = styled.div`
   position: absolute;
-  width: 200px;
+  width: 180px;
   top: 95px;
   z-index: 10000;
   padding: 3px;
@@ -49,7 +49,7 @@ const Item = styled.ul`
 const Report = styled.li`
   cursor: pointer;
   background-color: ${(props) => props.theme.midGrey};
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 6px;
   font-weight: 600;
 `
@@ -71,7 +71,7 @@ const FreeBoard = ({ mountains }) => {
           <li>{totalCount ? totalCount : "..."}</li>
         </Item>
         <Item>
-          <Report onClick={() => openNotice()}>공지&제보</Report>
+          <Report onClick={() => openNotice()}>공지</Report>
         </Item>
       </Board>
     </InfoBoxS>
