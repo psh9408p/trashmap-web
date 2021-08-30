@@ -74,9 +74,9 @@ const Home = () => {
           " / 처리 여부: " +
           (tMountain.finish ? "완료" : "미완료") +
           "</p>",
-        `   <p>0명이 소각을 지지합니다!</p>`,
+        // `   <p>0명이 소각을 지지합니다!</p>`,
         '   <div style="margin:20px 0 5px 0">',
-        `     <a href="/tmountain/${tMountain.id}" style="border:none;padding:10px 20px;border-radius:5px;background-color:#ecf0f1;">참여하기</a>`,
+        `     <a href="/tmountain/${tMountain.id}" style="border:none;padding:10px 20px;border-radius:5px;background-color:#ecf0f1;">자세히</a>`,
         "   </div>",
         "</div>",
       ].join("")
