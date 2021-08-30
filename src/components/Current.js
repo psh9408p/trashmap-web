@@ -21,7 +21,6 @@ const CurrentLocation = styled.div`
 `
 
 const Current = ({ getCurrentPosition, getPosition }) => {
-  console.log(isMobile)
   return (
     <CurrentLocation onClick={getCurrentPosition} getPosition={getPosition} isMobile={isMobile}>
       <FontAwesomeIcon icon={faCrosshairs} size="lg" />

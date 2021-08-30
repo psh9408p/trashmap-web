@@ -65,17 +65,16 @@ const Home = () => {
       // 정보창 html
       var contentString = [
         '<div style="width:250px;display:flex;align-items:center;flex-direction:column;padding:15px;line-height:150%;border:none;">',
-        '<div style="margin-bottom:10px;max-width:220px;">',
+        '   <div style="margin-bottom:10px;max-width:220px;">',
         tMountain.image ? `<img src="${tMountain.image}" height="150" alt="쓰레기 지도" />` : null,
-        "</div>",
-        "<p>규모: " +
+        "   </div>",
+        "   <p>규모 : " +
           (tMountain.amount ? `${tMountain.amount.toLocaleString("ko-KR")}톤` : `미등록`) +
-          " / 처리 여부: " +
-          (tMountain.finish ? "완료" : "미완료") +
-          "</p>",
-        // `   <p>0명이 소각을 지지합니다!</p>`,
+          "   </p>",
+        "   <p>처리 여부 : " + (tMountain.finish ? "완료" : "미완료") + "</p>",
+        "   <p>(처리를 지지합니다! 기능 준비중...)</p>",
         '   <div style="margin:20px 0 5px 0">',
-        `     <a href="/tmountain/${tMountain.id}" style="border:none;padding:10px 20px;border-radius:5px;background-color:#ecf0f1;">자세히</a>`,
+        `     <a href="/tmountain/${tMountain.id}" style="border:none;padding:10px 20px;border-radius:5px;background-color:#c8d6e5;font-weight:600;">자세히</a>`,
         "   </div>",
         "</div>",
       ].join("")
@@ -84,6 +83,7 @@ const Home = () => {
       var marker = new naver.maps.Marker({
         map: map,
         position,
+        icon: "./img/mountain2.svg",
       })
 
       // 정보창 생성부
@@ -104,7 +104,7 @@ const Home = () => {
       // 마커에 이벤트 등록
       naver.maps.Event.addListener(marker, "click", function (e) {
         // console.log(infowindow, infowindow.getMap())
-        console.log(e)
+        // console.log(e)
         if (infowindow.getMap()) {
           infowindow.close()
         } else {

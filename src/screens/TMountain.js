@@ -88,7 +88,7 @@ function TMountain() {
     notifyOnNetworkStatusChange: true,
   })
 
-  console.log(data)
+  // console.log(data)
 
   return (
     <Wrapper>
@@ -101,7 +101,7 @@ function TMountain() {
         />
         <Bio>
           <InforTitle>
-            <FontAwesomeIcon icon={faMountain} size="2x" />
+            <FontAwesomeIcon icon={faMountain} size="2x" color="#576574" />
             <div>쓰레기산 정보</div>
           </InforTitle>
           {data?.seeTMountain && <InfoDiv mountain={data?.seeTMountain} />}

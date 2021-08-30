@@ -74,7 +74,7 @@ function InfoDiv({ mountain }) {
     <Popup
       trigger={
         <div style={{ marginLeft: "5px" }}>
-          <FontAwesomeIcon icon={faQuestionCircle} size="1x" color={"grey"} />
+          <FontAwesomeIcon icon={faQuestionCircle} size="1x" color={"#ff6b6b"} />
         </div>
       }
       position="right center"
@@ -98,7 +98,7 @@ function InfoDiv({ mountain }) {
           <Popup
             trigger={
               <div style={{ margin: "0 5px" }}>
-                <FontAwesomeIcon icon={faTruck} size="1x" color={"grey"} />
+                <FontAwesomeIcon icon={faTruck} size="1x" color={"#ff6b6b"} />
               </div>
             }
             position="right top"

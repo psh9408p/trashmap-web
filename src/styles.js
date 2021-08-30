@@ -6,8 +6,11 @@ export const lightTheme = {
   bgColor: "#FAFAFA",
   fontColor: "rgb(38, 38, 38)",
   borderColor: "rgb(219, 219, 219)",
+  blackGrey: "#576574",
+  darkGrey: "#8395a7",
   midGrey: "#c8d6e5",
   lightGrey: "#F4F4F4",
+  lightRed: "#ff6b6b",
   windowWidth: `${window.innerWidth}px`,
   windowHeight: `${window.innerHeight - 35}px`,
 }
@@ -28,7 +31,7 @@ export const GlobalStyles = createGlobalStyle`
     body {
         background-color:${(props) => props.theme.bgColor};
         font-size:14px;
-        font-family:'Open Sans', sans-serif;
+        font-family:"GmarketSansMedium";
         color:${(props) => props.theme.fontColor};
     }
     a {
