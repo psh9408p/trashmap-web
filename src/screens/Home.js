@@ -83,7 +83,7 @@ const Home = () => {
       var marker = new naver.maps.Marker({
         map: map,
         position,
-        icon: "./img/mountain2.svg",
+        icon: "./img/mountain.svg",
       })
 
       // 정보창 생성부
