@@ -43,10 +43,9 @@ const Intro = styled.div`
   cursor: pointer;
   text-align: center;
   background-color: ${(props) => props.theme.midGrey};
-  padding: 20px;
+  padding: 10px;
   width: 100%;
   font-weight: 600;
-  margin-bottom: 20px;
   border-radius: 10px;
   box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px 0px;
   border: 1px solid rgb(232, 232, 232);
@@ -63,18 +62,12 @@ const Report = styled.div`
   border-radius: 10px;
   box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px 0px;
   border: 1px solid rgb(232, 232, 232);
-
-  p {
-    font-weight: 600;
-  }
+  margin-top: 10px;
+  line-height: 20px;
 `
 
 const ItemOrder = styled.ol`
   list-style-type: decimal;
-
-  li {
-    margin-top: 5px;
-  }
 `
 
 const ALink = styled(Link)`
@@ -82,9 +75,11 @@ const ALink = styled(Link)`
 `
 
 const popWidth = 320
-const popHeight = 200
+const popHeight = 280
 const popTop = window.innerHeight / 2 - popWidth / 2 + 45
 const popLeft = window.innerWidth / 2 - popWidth / 2
+const notice1 =
+  "전국에 400개 이상의 쓰레기산이 존재합니다. 하지만 현재 등록된 쓰레기산의 정보가 턱없이 부족한 현실입니다. 여러분의 적극적인 참여와 제보가 필요합니다."
 
 function Notice() {
   return (
@@ -101,6 +96,7 @@ function Notice() {
           <ALink to={routes.introduce}>
             <Intro onClick={() => closeNotice()}>K-트래쉬맵 소개</Intro>
           </ALink>
+          <Report>{notice1}</Report>
           <Report>
             <p>쓰레기산 제보, 피드백&기타 문의</p>
             <ItemOrder>
