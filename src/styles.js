@@ -11,6 +11,7 @@ export const lightTheme = {
   midGrey: "#c8d6e5",
   lightGrey: "#F4F4F4",
   lightRed: "#ff6b6b",
+  yellow: "#feca57",
   windowWidth: `${window.innerWidth}px`,
   windowHeight: `${window.innerHeight - 35}px`,
 }

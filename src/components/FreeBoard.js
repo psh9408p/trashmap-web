@@ -1,10 +1,10 @@
 import React from "react"
 import styled from "styled-components"
-import { openNotice } from "../apollo"
+import { openDonation, openNotice } from "../apollo"
 
 const InfoBoxS = styled.div`
   position: absolute;
-  width: 180px;
+  width: 220px;
   top: 95px;
   z-index: 10000;
   padding: 3px;
@@ -49,9 +49,13 @@ const Item = styled.ul`
 const Report = styled.li`
   cursor: pointer;
   background-color: ${(props) => props.theme.midGrey};
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-radius: 6px;
   font-weight: 600;
+`
+
+const Donation = styled(Report)`
+  background-color: ${(props) => props.theme.yellow};
 `
 
 const FreeBoard = ({ mountains }) => {
@@ -72,6 +76,9 @@ const FreeBoard = ({ mountains }) => {
         </Item>
         <Item>
           <Report onClick={() => openNotice()}>공지</Report>
+        </Item>
+        <Item>
+          <Donation onClick={() => openDonation()}>후원</Donation>
         </Item>
       </Board>
     </InfoBoxS>

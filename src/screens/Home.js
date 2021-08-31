@@ -7,7 +7,8 @@ import SearchBox from "../components/SearchBox"
 import FreeBoard from "../components/FreeBoard"
 import Loading from "../components/Loading"
 import Notice from "../components/Notice"
-import { noticePopVar } from "../apollo"
+import Donation from "../components/Donation"
+import { donationPopVar, noticePopVar } from "../apollo"
 // import styled from "styled-components"
 // import $ from "jquery"
 
@@ -51,6 +52,7 @@ let marker // 현재위치 마커
 
 const Home = () => {
   const noticePop = useReactiveVar(noticePopVar)
+  const donationPop = useReactiveVar(donationPopVar)
 
   const [getPosition, setGetPosition] = useState(false)
 
@@ -195,6 +197,7 @@ const Home = () => {
   return (
     <div>
       {noticePop && <Notice />}
+      {donationPop && <Donation />}
       {loading && <Loading />}
       <div id="map" />
       <SearchBox SearchBtn={SearchBtn} />

@@ -24,13 +24,21 @@ export const disableDarkMode = () => {
   localStorage.removeItem(DARK_MODE)
   darkModeVar(false)
 }
-// 첫페이지 공지 팝업 변수
+// 공지 팝업 변수
 export const noticePopVar = makeVar(false)
 export const openNotice = () => {
   noticePopVar(true)
 }
 export const closeNotice = () => {
   noticePopVar(false)
+}
+// 후원 팝업 변수
+export const donationPopVar = makeVar(false)
+export const openDonation = () => {
+  donationPopVar(true)
+}
+export const closeDonation = () => {
+  donationPopVar(false)
 }
 
 // Client
