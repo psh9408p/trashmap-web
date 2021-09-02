@@ -49,6 +49,7 @@ const mapOptions = {
 
 let map // 지도 넣을 곳
 let marker // 현재위치 마커
+const infoViews = []
 
 const Home = () => {
   const noticePop = useReactiveVar(noticePopVar)
@@ -56,12 +57,12 @@ const Home = () => {
 
   const [getPosition, setGetPosition] = useState(false)
 
-  const { data, loading } = useQuery(TMounts_QUERY)
+  const { data, loading, error } = useQuery(TMounts_QUERY)
 
   // 마커 생성 함수
   const createMarker = (tMountains) => {
     // 여러개 마커 생성 및 이벤트 등록
-    tMountains.forEach((tMountain) => {
+    tMountains.forEach((tMountain, index) => {
       const position = new naver.maps.LatLng(tMountain.latitude, tMountain.longtitude)
 
       // 정보창 html
@@ -102,15 +103,24 @@ const Home = () => {
 
         pixelOffset: new naver.maps.Point(0, -10),
       })
+      infoViews.push({ body: infowindow, display: false })
 
       // 마커에 이벤트 등록
       naver.maps.Event.addListener(marker, "click", function (e) {
         // console.log(infowindow, infowindow.getMap())
-        // console.log(e)
         if (infowindow.getMap()) {
           infowindow.close()
+          infoViews[index].display = false
         } else {
+          //만약 다른 켜져있는 정보창이 있다면 끄기
+          const viewIndex = infoViews.findIndex((a) => a.display)
+          if (viewIndex !== -1) {
+            infoViews[viewIndex].body.setMap(null)
+            infoViews[viewIndex].display = false
+          }
+          //클릭한 마커 정보창 켜기
           infowindow.open(map, marker)
+          infoViews[index].display = true
         }
       })
     })
@@ -182,10 +192,19 @@ const Home = () => {
     }
   }
 
+  // 지도 초기화
   useEffect(() => {
     map = new naver.maps.Map("map", mapOptions) // 지도 생성
     const mapSize = new naver.maps.Size(window.innerWidth, window.innerHeight - 35)
     map.setSize(mapSize)
+    // 맵 누르면 마커 정보창 꺼지게
+    naver.maps.Event.addListener(map, "click", function () {
+      const viewIndex = infoViews.findIndex((a) => a.display)
+      if (viewIndex !== -1) {
+        infoViews[viewIndex].body.setMap(null)
+        infoViews[viewIndex].display = false
+      }
+    })
   }, [])
 
   useEffect(() => {
@@ -193,7 +212,7 @@ const Home = () => {
       createMarker(data?.seeTMountains) // 마커 생성
     }
   }, [data])
-
+  // console.log(data, loading, error)
   return (
     <div>
       {noticePop && <Notice />}
