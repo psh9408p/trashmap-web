@@ -49,7 +49,8 @@ const mapOptions = {
 
 let map // 지도 넣을 곳
 let marker // 현재위치 마커
-const infoViews = []
+const infoViews = [] // 쓰레기산 마커 모음
+let searchMarker // 검색 마커
 
 const Home = () => {
   const noticePop = useReactiveVar(noticePopVar)
@@ -181,10 +182,15 @@ const Home = () => {
       const lat = target.y
       const lng = target.x
       const latlng = new naver.maps.LatLng(lat, lng)
-      // marker = new naver.maps.Marker({
-      //   position: latlng,
-      //   map: map,
-      // });
+      // 마커 생성부
+      if (searchMarker) {
+        searchMarker.setMap(null)
+      }
+      searchMarker = new naver.maps.Marker({
+        position: latlng,
+        map: map,
+      })
+
       map.setZoom(15, false)
       map.panTo(latlng)
     } else {

@@ -1,3 +1,4 @@
+/*global naver*/
 import React from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -42,6 +43,7 @@ const SearchInput = styled.input`
 `
 
 const IconWrap = styled.div`
+  cursor: pointer;
   position: absolute;
   display: flex;
   justify-content: flex-end;
@@ -73,7 +75,7 @@ const SearchBox = ({ SearchBtn }) => {
       {/* <div></div> */}
       <SearchWrap>
         <IconWrap>
-          <FontAwesomeIcon onClick={SearchBtn} icon={faSearch} size="lg" />
+          <FontAwesomeIcon icon={faSearch} size="lg" />
         </IconWrap>
         <InputWrap>
           <SearchInput
