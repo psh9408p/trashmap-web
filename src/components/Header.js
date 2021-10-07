@@ -1,9 +1,9 @@
-import { useReactiveVar } from "@apollo/client"
-import { Link } from "react-router-dom"
-import styled from "styled-components"
-import { isLoggedInVar } from "../apollo"
-import useUser from "../hooks/useUser"
-import { Logo } from "./Icons"
+import { useReactiveVar } from "@apollo/client";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { isLoggedInVar } from "../apollo";
+import useUser from "../hooks/useUser";
+import { Logo } from "./Icons";
 
 const SHeader = styled.header`
   width: 100%;
@@ -13,8 +13,9 @@ const SHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 35px;
-`
+  height: 50px;
+  /* margin-top: 30px; */
+`;
 
 const Wrapper = styled.div`
   /* max-width: 930px; */
@@ -22,7 +23,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+`;
 
 const MarkLink = styled(Link)`
   display: flex;
@@ -32,7 +33,7 @@ const MarkLink = styled(Link)`
     font-size: 1.2em;
     font-weight: 900;
   }
-`
+`;
 
 const Column = styled.div`
   display: flex;
@@ -42,7 +43,7 @@ const Column = styled.div`
     font-size: 1.2em;
     font-weight: 900;
   }
-`
+`;
 
 function Header() {
   // const isLoggedIn = useReactiveVar(isLoggedInVar)
@@ -80,6 +81,6 @@ function Header() {
         </Column>
       </Wrapper>
     </SHeader>
-  )
+  );
 }
-export default Header
+export default Header;

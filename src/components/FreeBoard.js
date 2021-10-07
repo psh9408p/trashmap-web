@@ -1,11 +1,11 @@
-import React from "react"
-import styled from "styled-components"
-import { openDonation, openNotice } from "../apollo"
+import React from "react";
+import styled from "styled-components";
+import { openDonation, openNotice } from "../apollo";
 
 const InfoBoxS = styled.div`
   position: absolute;
   width: 220px;
-  top: 95px;
+  top: 125px;
   z-index: 10000;
   padding: 3px;
   border-radius: 4px;
@@ -22,20 +22,21 @@ const InfoBoxS = styled.div`
   @media screen and (min-width: 420px) {
     left: 10px;
   }
-`
+`;
 
 const Board = styled.div`
   display: flex;
   justify-content: space-around;
   text-align: center;
   align-items: center;
-`
+`;
 
 const Item = styled.ul`
   padding: 5px;
 
   /* &:not(:first-child) {
-    border-left: 1px solid ${(props) => props.theme.lightGrey};
+    border-left: 1px solid ${(props) =>
+    props.theme.lightGrey};
   } */
 
   li {
@@ -44,7 +45,7 @@ const Item = styled.ul`
       font-weight: 600;
     }
   }
-`
+`;
 
 const Report = styled.li`
   cursor: pointer;
@@ -52,16 +53,16 @@ const Report = styled.li`
   padding: 10px 10px;
   border-radius: 6px;
   font-weight: 600;
-`
+`;
 
 const Donation = styled(Report)`
   background-color: ${(props) => props.theme.yellow};
-`
+`;
 
 const FreeBoard = ({ mountains }) => {
-  const totalCount = mountains?.length
-  const finishMountains = mountains?.filter((mountain) => mountain.finish)
-  const finishCount = finishMountains?.length
+  const totalCount = mountains?.length;
+  const finishMountains = mountains?.filter((mountain) => mountain.finish);
+  const finishCount = finishMountains?.length;
 
   return (
     <InfoBoxS>
@@ -82,7 +83,7 @@ const FreeBoard = ({ mountains }) => {
         </Item>
       </Board>
     </InfoBoxS>
-  )
-}
+  );
+};
 
-export default FreeBoard
+export default FreeBoard;
