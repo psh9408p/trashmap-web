@@ -1,16 +1,15 @@
 /*global naver*/
-import React from "react"
-import styled from "styled-components"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import React from "react";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const InfoBoxS = styled.div`
   position: absolute;
   height: 42px;
   z-index: 10000;
-  top: 35px;
+  top: 65px;
   padding: 10px 15px;
-  border-radius: 4px;
   display: flex;
   justify-content: flex-start;
   border-radius: 10px;
@@ -26,21 +25,21 @@ const InfoBoxS = styled.div`
     width: 400px;
     margin: 10px;
   }
-`
+`;
 
 const SearchWrap = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-`
+`;
 const InputWrap = styled.div`
   position: absolute;
   width: 100%;
   top: 0;
-`
+`;
 const SearchInput = styled.input`
   width: 100%;
-`
+`;
 
 const IconWrap = styled.div`
   cursor: pointer;
@@ -50,23 +49,23 @@ const IconWrap = styled.div`
   width: 100%;
   top: 0;
   /* height: 100%; */
-`
+`;
 
 const TitleBox = styled.div`
   width: 45px;
   font-size: 14px;
   font-weight: 900;
   margin-right: 12px;
-`
+`;
 
 const Border = styled.div`
   width: 1px;
   opacity: 0.2;
   height: 80%;
   background: rgb(112, 112, 112);
-`
+`;
 
-const SearchBox = ({ SearchBtn }) => {
+const SearchBox = ({ addressSearchB, SearchBtn }) => {
   return (
     <InfoBoxS>
       {/* <TitleBox>트래쉬맵</TitleBox> */}
@@ -79,7 +78,7 @@ const SearchBox = ({ SearchBtn }) => {
         </IconWrap>
         <InputWrap>
           <SearchInput
-            onKeyDown={SearchBtn}
+            onKeyDown={(addressSearchB, SearchBtn)}
             placeholder={"예) 서울역 or 포레나노원아파트 or 삼성동"}
             type="text"
           />
@@ -87,7 +86,7 @@ const SearchBox = ({ SearchBtn }) => {
       </SearchWrap>
       {/* </div> */}
     </InfoBoxS>
-  )
-}
+  );
+};
 
-export default SearchBox
+export default SearchBox;
